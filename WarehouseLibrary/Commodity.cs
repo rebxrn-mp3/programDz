@@ -35,7 +35,8 @@ namespace WarehouseLibrary
             return new string[]
             {
         $"{Article} - {Name}",
-        $"Вес: {Weight.ToString(CultureInfo.InvariantCulture)} кг. Характеристика: {GetCharacteristicText()}. Макс. стопок: {MaxStack}"
+        $"Вес: {Weight.ToString(CultureInfo.InvariantCulture)} кг. " +
+        $"Характеристика: {GetCharacteristicText()}. Макс. стопок: {MaxStack}"
             };
         }
 

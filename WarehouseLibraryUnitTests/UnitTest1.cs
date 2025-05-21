@@ -40,5 +40,45 @@ namespace WarehouseLibrary.UnitTests
                 maxStack: 5
             );
         }
+        [Test]
+        public void FoodProduct_GetInfo_ReturnsThreeLines()
+        {
+            var food = new FoodProduct(
+                article: "ART-002",
+                name: "Молоко",
+                weight: 1.2,
+                dimensions: "10x10x20",
+                arrivalDate: new DateTime(2023, 10, 1),
+                price: 100m,
+                characteristic: CommodityCharacteristic.Fragile,
+                maxStack: 3,
+                expiryDate: new DateTime(2023, 12, 31),
+                storageTemperature: 4.5
+            );
+
+            var info = food.GetInfo();
+            Assert.That(info.Length, Is.EqualTo(3)); // Проверка количества строк
+            Assert.That(info[2], Is.EqualTo("Срок годности: 31.12.2023. Температура хранения: 4.5°C"));
+        }
+
+        [Test]
+        public void BuildingMaterial_GetInfo_ReturnsThreeLines()
+        {
+            var material = new BuildingMaterial(
+                article: "ART-003",
+                name: "Кирпич",
+                weight: 2.5,
+                dimensions: "20x10x5",
+                arrivalDate: new DateTime(2023, 10, 1),
+                price: 50m,
+                characteristic: CommodityCharacteristic.Ordinary,
+                maxStack: 10,
+                canBeStoredOutside: true
+            );
+
+            var info = material.GetInfo();
+            Assert.That(info.Length, Is.EqualTo(3)); // Проверка количества строк
+            Assert.That(info[2], Is.EqualTo("Хранение на открытой площадке: Да"));
+        }
     }
 }
