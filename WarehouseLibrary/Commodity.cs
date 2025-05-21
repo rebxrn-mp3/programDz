@@ -4,19 +4,16 @@ namespace WarehouseLibrary
 {
     public class Commodity
     {
-        // Свойства, передаваемые через конструктор (отмечены точкой в задании)
-        public string Name { get; set; }                // Наименование
-        public double Weight { get; set; }              // Вес (кг)
-        public string Dimensions { get; set; }          // Габариты (длина x ширина x высота)
-        public DateTime ArrivalDate { get; set; }       // Дата поступления
-        public decimal Price { get; set; }              // Цена
-        public int MaxStack { get; set; }               // Особенности складирования (макс. стопок)
+        public string Name { get; set; }
+        public double Weight { get; set; }
+        public string Dimensions { get; set; }
+        public DateTime ArrivalDate { get; set; }
+        public decimal Price { get; set; }
+        public int MaxStack { get; set; }
 
-        // Свойства только для чтения
-        public string Article { get; }                  // Артикул (только для чтения)
-        public CommodityCharacteristic Characteristic { get; } // Характеристика (перечисление)
+        public string Article { get; }
+        public CommodityCharacteristic Characteristic { get; }
 
-        // Конструктор
         public Commodity(string article, string name, double weight, string dimensions,
                          DateTime arrivalDate, decimal price, CommodityCharacteristic characteristic,
                          int maxStack)
@@ -31,7 +28,6 @@ namespace WarehouseLibrary
             MaxStack = maxStack;
         }
 
-        // Метод GetInfo()
         public virtual string[] GetInfo()
         {
             return new string[]
@@ -41,7 +37,6 @@ namespace WarehouseLibrary
             };
         }
 
-        // Вспомогательный метод для перевода перечисления в текст
         private string GetCharacteristicText()
         {
             switch (Characteristic)

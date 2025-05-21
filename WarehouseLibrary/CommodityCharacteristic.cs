@@ -8,8 +8,8 @@ namespace WarehouseLibrary
 {
     public enum CommodityCharacteristic
     {
-        Ordinary,   // Обыкновенный
-        Fragile,    // Хрупкий
-        MoistureSensitive // Боится сырости
+        Ordinary,
+        Fragile,
+        MoistureSensitive
     }
 }
