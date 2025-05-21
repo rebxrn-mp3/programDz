@@ -80,5 +80,43 @@ namespace WarehouseLibrary.UnitTests
             Assert.That(info.Length, Is.EqualTo(3)); // Проверка количества строк
             Assert.That(info[2], Is.EqualTo("Хранение на открытой площадке: Да"));
         }
+        [Test]
+        public void Commodity_CompareTo_SortsByName()
+        {
+            var apple = new Commodity("ART-001", "Яблоко", 1.5, "10x10x10", DateTime.Now, 100m, CommodityCharacteristic.Ordinary, 5);
+            var banana = new Commodity("ART-002", "Банан", 2.0, "20x10x10", DateTime.Now, 150m, CommodityCharacteristic.Fragile, 3);
+
+            var list = new List<Commodity> { apple, banana };
+            list.Sort();
+
+            Assert.That(list[0].Name, Is.EqualTo("Банан"));
+            Assert.That(list[1].Name, Is.EqualTo("Яблоко"));
+        }
+        [Test]
+        public void Shipment_Constructor_AddsUniqueCommodities()
+        {
+            var milk = new Commodity("ART-003", "Молоко", 1.0, "10x10x20", DateTime.Now, 200m, CommodityCharacteristic.MoistureSensitive, 2);
+            var bread = new Commodity("ART-004", "Хлеб", 0.5, "15x5x5", DateTime.Now, 50m, CommodityCharacteristic.Ordinary, 10);
+
+            var shipment = new Shipment("Поставщик-1", "SHIP-001", DateTime.Now, new List<Commodity> { milk, bread, milk });
+
+            Assert.That(shipment, Has.Exactly(2).Items);
+            Assert.That(shipment, Has.One.EqualTo(milk));
+            Assert.That(shipment, Has.One.EqualTo(bread));
+        }
+        [Test]
+        public void Shipment_ImplementsIEnumerable()
+        {
+            var sugar = new Commodity("ART-005", "Сахар", 2.5, "30x20x10", DateTime.Now, 300m, CommodityCharacteristic.Fragile, 4);
+            var shipment = new Shipment("Поставщик-2", "SHIP-002", DateTime.Now, new List<Commodity> { sugar });
+
+            foreach (var item in shipment)
+            {
+                Assert.That(item.Name, Is.EqualTo("Сахар"));
+            }
+
+            Assert.That(shipment.First().Name, Is.EqualTo("Сахар"));
+        }
+
     }
 }
